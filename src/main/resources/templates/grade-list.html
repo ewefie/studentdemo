@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade list</title>
+</head>
+<body>
+<th:block th:replace="fragments :: navigator"/>
+<h1>Grade List of: ...</h1>
+<table style="border: 1px solid #000; width: 100%">
+    <tr>
+        <th>Lp.</th>
+        <th>Id</th>
+        <th>Value</th>
+        <th>Subject</th>
+        <th>Date added</th>
+        <th></th>
+    <tr th:each="gr,loop : ${grades}">
+        <td th:text="${loop.index}"></td>
+        <td th:text="${gr.getId()}"></td>
+        <td th:text="${gr.getValue()}"></td>
+        <td th:text="${gr.getSubject()}"></td>
+        <td th:text="${gr.getDateAdded()}"></td>
+        <td>
+            <a th:href="@{'/grade/edit/'+ ${gr.getId()}}">Edit</a>
+            <a th:href="@{'/grade/delete/'+${gr.getId()}}">Delete</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
