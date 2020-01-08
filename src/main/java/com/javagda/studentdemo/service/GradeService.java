@@ -16,7 +16,7 @@ public class GradeService {
     private final GradeRepository gradeRepository;
     private final StudentRepository studentRepository;
 
-    public void saveORrUpdate(final Grade grade, final Long studentId) {
+    public void saveOrUpdate(final Grade grade, final Long studentId) {
         final Optional<Student> optionalStudent = studentRepository.findById(studentId);
         if (optionalStudent.isPresent()) {
             grade.setStudent(optionalStudent.get());

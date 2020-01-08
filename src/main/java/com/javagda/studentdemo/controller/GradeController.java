@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -27,6 +28,7 @@ public class GradeController {
         return "grade-form";
     }
 
+//    why do edit change dateAdded?, attriubute added to fix this but I'm not sure if it is a correct wat
     @GetMapping("/edit/{id}")
     public String editForm(final Model model, @PathVariable(name = "id") Long id) {
         Optional<Grade> optionalGrade = gradeService.find(id);
@@ -34,6 +36,7 @@ public class GradeController {
             model.addAttribute("grade", optionalGrade.get());
             model.addAttribute("subjects", GradeSubject.values());
             model.addAttribute("studentId", optionalGrade.get().getStudent().getId());
+            model.addAttribute("dateAdded", optionalGrade.get().getDateAdded());
             return "grade-form";
         }
         return "redirect:/grade/list";
@@ -41,17 +44,17 @@ public class GradeController {
 
     @PostMapping("/add")
     public String submitGradeForm(final Grade grade, final Long studentId) {
-        gradeService.saveORrUpdate(grade, studentId);
+        gradeService.saveOrUpdate(grade, studentId);
         return "redirect:/student/grades/" + studentId;
     }
 
-//    @GetMapping("/list")
-//    public String listGrades(final Model model) {
-//        List<Grade> grades = gradeService.findAll();
-//        model.addAttribute("grades", grades);
-//        System.out.println(grades);
-//        return "/grade-list";
-//    }
+//    usynąc i zmienc redirect na liste studentów
+    @GetMapping("/list")
+    public String listGrades(final Model model) {
+        List<Grade> grades = gradeService.findAll();
+        model.addAttribute("grades", grades);
+        return "/grade-list";
+    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") Long gradeId) {
