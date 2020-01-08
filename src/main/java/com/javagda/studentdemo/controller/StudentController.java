@@ -67,6 +67,7 @@ public class StudentController {
         final Optional<Student> optionalStudent = studentService.find(id);
         if (optionalStudent.isPresent()) {
             model.addAttribute("grades", optionalStudent.get().getGrades());
+            model.addAttribute("student", optionalStudent.get());
             return "grade-list";
         }
         return "redirect:/student/list";

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,21 +41,27 @@ public class GradeController {
 
     @PostMapping("/add")
     public String submitGradeForm(final Grade grade, final Long studentId) {
-        gradeService.save(grade, studentId);
-        return "redirect:/grade/list";
+        gradeService.saveORrUpdate(grade, studentId);
+        return "redirect:/student/grades/" + studentId;
     }
 
-    @GetMapping("/list")
-    public String listGrades(final Model model) {
-        List<Grade> grades = gradeService.findAll();
-        model.addAttribute("grades", grades);
-        return "/grade-list";
-    }
+//    @GetMapping("/list")
+//    public String listGrades(final Model model) {
+//        List<Grade> grades = gradeService.findAll();
+//        model.addAttribute("grades", grades);
+//        System.out.println(grades);
+//        return "/grade-list";
+//    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable(name = "id") Long gradeId) {
-        gradeService.delete(gradeId);
-        return "redirect:/grade/list";
+        final Optional<Grade> optionalGrade = gradeService.find(gradeId);
+        if (optionalGrade.isPresent()) {
+            final Long studentId = optionalGrade.get().getStudent().getId();
+            gradeService.delete(gradeId);
+            return "redirect:/student/grades/" + studentId;
+        }
+        return "redirect:/student/list";
     }
 
 }

@@ -2,19 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <title>Grade list</title>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator"/>
-<h1>Grade List of: ...</h1>
-<table style="border: 1px solid #000; width: 100%">
+<h2>Grade List of: <span th:text="${student.getFirstName()} "></span> <span th:text="${student.getLastName()}"></span>
+</h2>
+<table class="table table-striped">
+    <thead class="thead-dark">
     <tr>
         <th>Lp.</th>
         <th>Id</th>
         <th>Value</th>
         <th>Subject</th>
         <th>Date added</th>
-        <th></th>
+        <th></th><!--        buttons-->
+    </thead>
+    <tbody>
     <tr th:each="gr,loop : ${grades}">
         <td th:text="${loop.index}"></td>
         <td th:text="${gr.getId()}"></td>
@@ -22,10 +29,13 @@
         <td th:text="${gr.getSubject()}"></td>
         <td th:text="${gr.getDateAdded()}"></td>
         <td>
-            <a th:href="@{'/grade/edit/'+ ${gr.getId()}}">Edit</a>
-            <a th:href="@{'/grade/delete/'+${gr.getId()}}">Delete</a>
+            <div class="btn-group" role="group">
+                <a class="btn btn-sm btn-outline-primary" th:href="@{'/grade/edit/'+ ${gr.getId()}}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{'/grade/delete/'+${gr.getId()}}">Delete</a>
+            </div>
         </td>
     </tr>
+    </tbody>
 </table>
 </body>
 </html>

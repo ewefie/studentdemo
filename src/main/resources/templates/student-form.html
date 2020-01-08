@@ -2,20 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <title>Student form</title>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator"/>
-<h1>Student form</h1>
-<form action="/student/add" method="post" th:object="${student}">
-    <input type="hidden" th:field="*{id}"/>
-    First name: <input type="text" th:field="*{firstName}"/><br/>
-    Last name: <input type="text" th:field="*{lastName}"/><br/>
-    Index : <input type="text" th:field="*{indexNumber}"/><br/>
-    Age: <input type="number" th:field="*{age}"/><br/>
-    Suspended: <input type="checkbox" th:field="*{suspended}"/><br/><br/>
-
-    <input type="submit">
-</form>
+<h2>Student form</h2>
+<div class="container container-sm">
+    <form action="/student/add" method="post" th:object="${student}">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group">
+            <label>First name:</label>
+            <input class="form-control" type="text" th:field="*{firstName}"/>
+        </div>
+        <div class="form-group">
+            <label>Last name:</label>
+            <input class="form-control" type="text" th:field="*{lastName}"/>
+        </div>
+        <div class="form-group">
+            <label>Index :</label>
+            <input class="form-control" type="text" th:field="*{indexNumber}"/>
+        </div>
+        <div class="form-group">
+            <label>Age:</label>
+            <input class="form-control" type="number" th:field="*{age}"/>
+        </div>
+        <div class="form-group form-check">
+            <input class="form-check-input" type="checkbox" th:field="*{suspended}"/>
+            <label class="form-check-label">Suspended</label>
+        </div>
+        <input class="btn btn-lg btn-outline-primary" type="submit">
+    </form>
+</div>
 </body>
 </html>

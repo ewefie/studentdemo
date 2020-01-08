@@ -2,20 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <title>Grade form</title>
 </head>
 <body>
 <th:block th:replace="fragments :: navigator"/>
-<h1>Grade Form</h1>
-<form th:action="@{/grade/add}" method="post" th:object="${grade}">
-    <input type="hidden" th:field="*{id}" th:value="*{id}">
-    <input type="hidden" name="studentId" th:value="${studentId}">
+<h2>Grade Form</h2>
+<div class="container container-sm">
+    <form th:action="@{/grade/add}" method="post" th:object="${grade}">
+        <input type="hidden" th:field="*{id}" th:value="*{id}">
+        <input type="hidden" name="studentId" th:value="${studentId}">
 
-    Subject: <select th:field="*{subject}">
-    <option th:each="subject:${subjects}" th:text="${subject}" th:value="${subject}"></option>
-    Grade value: <input type="number" step="0.5" th:field="*{value}" max="6" min="2"/>
-</select><br/><br/>
-    <input type="submit"/>
-</form>
+        <div class="form-group">
+            <label>Subject:</label>
+            <select class="form-control" th:field="*{subject}">
+                <option th:each="subject:${subjects}" th:text="${subject}" th:value="${subject}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Grade value:</label>
+            <input class="form-control" type="number" step="0.5" th:field="*{value}" max="6" min="2"/>
+        </div>
+        <input class="btn btn-lg btn-outline-primary" type="submit"/>
+    </form>
+</div>
 </body>
 </html>
