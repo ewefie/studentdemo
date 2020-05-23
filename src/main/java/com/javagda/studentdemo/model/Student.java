@@ -23,13 +23,6 @@ public class Student {
     private int age;
     private boolean suspended;
 
-    // metoda equals i hashcode jest nadpisana ponieważ używamy adnotacji @Data która zawiera @EqualsHashCode.
-    // z tego powodu hashcode generowany jest na podstawie WSZYSTKICH pól, w tym kolekcji GRADE. Żeby obliczyć
-    // hashcode obiektu student, należy obliczyć hashcode wszystkich ocen. Wewnątrz oceny również mamy taką samą adnotację
-    // co sprawia że żeby obliczyć hashcode studenta musimy obliczyć hashcode oceny i metoda się zapętla
-    // rekurencyjnie aż do wystąpienia "Stack overflow"
-
-    // to samo dzieje się z metodą tostring
 
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

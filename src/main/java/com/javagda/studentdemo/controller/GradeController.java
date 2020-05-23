@@ -36,7 +36,6 @@ public class GradeController {
             model.addAttribute("grade", optionalGrade.get());
             model.addAttribute("subjects", GradeSubject.values());
             model.addAttribute("studentId", optionalGrade.get().getStudent().getId());
-            model.addAttribute("dateAdded", optionalGrade.get().getDateAdded());
             return "grade-form";
         }
         return "redirect:/grade/list";
@@ -45,10 +44,11 @@ public class GradeController {
     @PostMapping("/add")
     public String submitGradeForm(final Grade grade, final Long studentId) {
         gradeService.saveOrUpdate(grade, studentId);
+        System.out.println(grade);
         return "redirect:/student/grades/" + studentId;
     }
 
-//    usynąc i zmienc redirect na liste studentów
+//    usunąc i zmienc redirect na liste studentów
     @GetMapping("/list")
     public String listGrades(final Model model) {
         List<Grade> grades = gradeService.findAll();

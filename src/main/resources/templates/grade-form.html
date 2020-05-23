@@ -14,8 +14,7 @@
     <form th:action="@{/grade/add}" method="post" th:object="${grade}">
         <input type="hidden" th:field="*{id}" th:value="*{id}">
         <input type="hidden" name="studentId" th:value="${studentId}">
-<!--        <input type="hidden" name="dateAdded" th:value="${dateAdded}">-->
-<!--        exception because of incompatable types-->
+<!--        <input type="hidden" name="dateAdded" th:value="${grade.getDateAdded()}">-->
 
 
         <div class="form-group">

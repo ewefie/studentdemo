@@ -23,7 +23,6 @@ public class StudentController {
     //    @RequestMapping(path = "/", method = RequestMethod.GET) //równoważne
     @GetMapping("/")
     public String getIndexPage() {
-//        byc może jako parametr trzeba dodac model
         return "index";
     }
 

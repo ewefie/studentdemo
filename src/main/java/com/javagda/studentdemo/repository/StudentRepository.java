@@ -10,9 +10,4 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-//    List<Student> findAllByLastNamOrLastName(final String lastName);
-
-//    @Query(value = "Select*from... where ?1", nativeQuery = true)
-//    List<Student> mojeQuery(final String lastName);
-
 }
